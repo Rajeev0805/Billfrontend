@@ -12,7 +12,6 @@ const Register = () => {
     email : "",
     password : ""
   })
-  let [password,setpassword]=useState()
    let handleChange = (e) => {
         let {name,value} = e.target
         setFormData({...formData,[name]:value})
