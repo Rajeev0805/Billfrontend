@@ -10,7 +10,7 @@ import { MdEventRepeat } from "react-icons/md";
 const Register = () => {
   return (
     <div className='bg-[#efefef] size-full flex justify-center items-center'>
-      <form action="" className='w-1/2  h-3/4 rounded-3xl bg-white shadow-2xl flex justify-center items-center flex-col gap-4 px-[80px] py-40'>
+      <form action="" className='w-1/2  h-[90%] rounded-3xl bg-white shadow-2xl flex justify-center items-center flex-col gap-4 px-[80px] py-40'>
         <div className='font-bold w-full flex justify-center items-center'>
           <h1 className='text-3xl'>Registration Form</h1>
         </div>
