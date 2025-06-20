@@ -7,26 +7,34 @@ import { MdEventRepeat } from "react-icons/md";
 
 
 const Register = () => {
-  let [formData,setFormData]=useState({
-    userName:"",
-    password:"",
-    name:"",
-    email:""
-  })
+  let [formData,setFormData]=useState({ })
+   let [repeatPassword,setRepeatPassword]=useState("")
+   let handlePassword=(e)=>{
+        setRepeatPassword(e.target.value)
+        if(e.target.value != formData.password){
+            e.target.style.backgroundColor = 'red'
+        }else{
+          e.target.style.backgroundColor = 'white'
+        }
+    }
 
   let handelChange=e=>{
     let {name,value}=e.target
     setFormData((preVal)=>({...preVal,[name]:value}))
   }
 
+
   let handelSubmit=e=>{
     e.preventDefault()
     console.log(formData);
-    
+    if(state.Password != repeatPassword){
+            alert("Password Not matching")
+            return
+        }
   }
   return (
-    <div className='bg-[#efefef] size-full flex justify-center items-center'>
-      <form action="" className='w-1/2 h-[90%]  rounded-3xl bg-white shadow-2xl flex  items-center flex-col gap-8 px-[80px] py-20 max-sm:w-[90%]' onSubmit={handelSubmit}>
+    <div className='bg-[#3a922ca1] size-full flex justify-center items-center'>
+      <form action="" className='w-1/2 h-[90%]  rounded-2xl bg-white shadow-2xl flex  items-center flex-col gap-4 px-[80px] py-10 max-sm:w-[90%]' onSubmit={handelSubmit}>
         <div className='font-bold w-full flex justify-center items-center'>
           <h1 className='text-3xl max-lg:text-sm'>Registration Form</h1>
         </div>
@@ -55,7 +63,7 @@ const Register = () => {
 
         
         <div className='border-2  w-full flex justify-center items-center px-3 rounded-sm'>
-          <input type="password" name="" placeholder='Re-type passoword' className='w-full outline-none px-4 h-10'/>
+          <input type="password" name="repeatPassword" placeholder='Re-type passoword' className='w-full outline-none px-4 h-10' onChange={handlePassword}/>
             <span><MdEventRepeat /></span>
         </div>
 
