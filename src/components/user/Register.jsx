@@ -4,33 +4,25 @@ import { CgRename } from "react-icons/cg";
 import { MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { MdEventRepeat } from "react-icons/md";
+import { FaRepeat } from 'react-icons/fa6';
 
 
 const Register = () => {
-  let [formData,setFormData]=useState({ })
-   let [repeatPassword,setRepeatPassword]=useState("")
-   let handlePassword=(e)=>{
-        setRepeatPassword(e.target.value)
-        if(e.target.value != formData.password){
-            e.target.style.backgroundColor = 'red'
-        }else{
-          e.target.style.backgroundColor = 'white'
-        }
-    }
-
-  let handelChange=e=>{
+  const [formData,setFormData]=useState({ })
+  const [repeatPassword,setRepeatPassword]=useState(true)
+  const [errorMessage,seterrorMessage] = useState("")
+  const handlePassword=(e)=>{
+    let {value} = e.target
+    formData.password!=value?setRepeatPassword(false):setRepeatPassword(true)
+    value==""&&setRepeatPassword(true)
+  }
+  const handelChange=e=>{
     let {name,value}=e.target
     setFormData((preVal)=>({...preVal,[name]:value}))
   }
-
-
-  let handelSubmit=e=>{
+  const handelSubmit=e=>{
     e.preventDefault()
-    console.log(formData);
-    if(state.Password != repeatPassword){
-            alert("Password Not matching")
-            return
-        }
+    
   }
   return (
     <div className='bg-[#3a922ca1] size-full flex justify-center items-center'>
@@ -62,14 +54,14 @@ const Register = () => {
         </div>
 
         
-        <div className='border-2  w-full flex justify-center items-center px-3 rounded-sm'>
+        <div className={`border-2  w-full flex justify-center items-center px-3 rounded-sm ${repeatPassword?`border-black`:`bg-red-600`}`}>
           <input type="password" name="repeatPassword" placeholder='Re-type passoword' className='w-full outline-none px-4 h-10' onChange={handlePassword}/>
-            <span><MdEventRepeat /></span>
+            <span><FaRepeat /></span>
         </div>
 
         
         <div className='border-2  w-full flex justify-center items-center px-3 rounded-sm bg-black'>
-         <button className='h-10 text-white font-bold text-md tracking-widest'>Click</button>
+         <button className='h-10 text-white text-md tracking-widest'>Click</button>
         </div>
       </form>
     </div>
