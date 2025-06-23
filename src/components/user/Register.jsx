@@ -53,7 +53,7 @@ const Register = () => {
       try{
         if(data.status == 201){
           toast.success("Registered successfully")
-          navigate("/Login")
+          navigate("/")
         }
         else{
           toast.error("Something Went wrong")
