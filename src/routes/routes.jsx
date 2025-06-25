@@ -19,7 +19,7 @@ let routes=createBrowserRouter([
     {
         path:"/Home",
         element : <Main/>,
-         children:[
+        children:[
             {
                 index:true,
                 element:<Home/>

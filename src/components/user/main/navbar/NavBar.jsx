@@ -10,13 +10,16 @@ const NavBar = () => {
     const handelShow=()=>{
         setShow(!show)
     }
+    // console.log(show);
     
   return (
-    <div className={`w-full h-[80px] bg-black text-amber-50 flex justify-around items-center text-xl max-sm:justify-start max-sm:px-8 ${show?'h-[210px] flex flex-col justify-around gap-2.5 items-start py-2.5':""} sm:flex-row sm:h-[80px] sm:justify-around sm:items-center`}>
+    <div className={`w-full h-[80px] bg-black text-amber-50 flex justify-around items-center text-xl max-sm:justify-start max-sm:px-8
+     ${show?`h-[210px] flex flex-col justify-around gap-2.5 items-start py-2.5`:""} 
+     sm:flex-row sm:h-[80px] sm:justify-around sm:items-center`}>
         <div className='hidden max-sm:flex'>
             {
                 show?<FaRegWindowClose onClick={handelShow}/>: <TfiMenuAlt onClick={handelShow}/>
-            } 
+            }
         </div>
 
         <div className={`max-sm:hidden${show?'block':""}`}>
