@@ -19,17 +19,30 @@ const Addbills = () => {
   }
   const  handelClick=e=>{
     let newObj={
-      id:Date.now()
+      id:Date.now(),
+      description:"",
+      quantity:"",
+      rate:"",
+      cgstPercent:"",
+      sgstPercent:"",
     }
    setItems((preVal)=>([...preVal,newObj])) 
   }
   const handelSubmit=(e)=>{
-    e.preventDefault()
-    console.log(bill);
-    
+
   }
   const removeElement=(id)=>{
-setItems(items.filter((val)=>val.id!=id))
+    setItems(items.filter((val)=>val.id!=id))
+  }
+  const updateElements=(id,name,value)=>{
+    setItems((preVal)=>{
+      return preVal.map((val)=>{
+        const updateItems={
+          ...val,[name]:value
+        }
+        return updateItems
+      })
+    })
   }
   return (
     <div className='bg-[#efefef] size-full flex justify-center items-center'>

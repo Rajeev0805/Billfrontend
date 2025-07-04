@@ -6,9 +6,7 @@ import { GiPriceTag } from "react-icons/gi";
 import { PiSealPercentLight } from "react-icons/pi";
 import { PiSealPercentThin } from "react-icons/pi";
 import { HiDocumentRemove } from "react-icons/hi";
-const BillItems = ({removeElement,val}) => {
-// console.log(removeElement,val);
-
+const BillItems = ({removeElement,val,updateElements}) => {
 
   return (
     <>
