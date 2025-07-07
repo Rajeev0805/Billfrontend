@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { LiaAudioDescriptionSolid } from "react-icons/lia";
 import { RiSortNumberDesc } from "react-icons/ri";
@@ -7,6 +6,11 @@ import { PiSealPercentLight } from "react-icons/pi";
 import { PiSealPercentThin } from "react-icons/pi";
 import { HiDocumentRemove } from "react-icons/hi";
 const BillItems = ({removeElement,val,updateElements}) => {
+const handelChange=(e)=>{
+  let {name,value}=e.target
+  updateElements(val.id,name,value)
+}
+
 
   return (
     <>
@@ -28,6 +32,8 @@ const BillItems = ({removeElement,val,updateElements}) => {
           name='description'
           placeholder='Enter description'
           className='outline-none w-full h-[30px]'
+          value={val.description}
+          onChange={handelChange}
         />
         <LiaAudioDescriptionSolid />
       </div>
@@ -38,6 +44,8 @@ const BillItems = ({removeElement,val,updateElements}) => {
           name='quantity'
           placeholder='Enter quantity'
           className='outline-none w-full h-[30px]'
+          value={val.quantity}
+          onChange={handelChange}
         />
         <RiSortNumberDesc />
       </div>
@@ -47,8 +55,9 @@ const BillItems = ({removeElement,val,updateElements}) => {
           type='number'
           name='rate'
           placeholder='Enter rate'
-
           className='outline-none w-full h-[30px]'
+          value={val.rate}
+          onChange={handelChange}
         />
         <GiPriceTag />
       </div>
@@ -58,8 +67,9 @@ const BillItems = ({removeElement,val,updateElements}) => {
           type='number'
           name='cgstPercent'
           placeholder='Enter CGST %'
-
           className='outline-none w-full h-[30px]'
+          value={val.cgstPercent}
+          onChange={handelChange}
         />
         <PiSealPercentLight />
       </div>
@@ -69,6 +79,8 @@ const BillItems = ({removeElement,val,updateElements}) => {
           type='number'
           name='sgstPercent'
           placeholder='Enter SGST %'
+          value={val.sgstPercent}
+          onChange={handelChange}
 
           className='outline-none w-full h-[30px]'
         />

@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import BillItems from '../../../bill/BillItems'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { contextApi } from '../../../context/Context'
+import empServices from '../../../../services/empServices'
 
 const Addbills = () => {
+  const navigate= useNavigate()
   const [bill,setBill]=useState({
     companyName:"",
     PoNo:"",
@@ -12,6 +17,7 @@ const Addbills = () => {
     GSTNo:"",
     clientBankName:""
   })
+  const {globalState}=useContext(contextApi)
   const [items,setItems]=useState([])
   const handelChange=(e)=>{
     let {name,value}=e.target
@@ -24,24 +30,79 @@ const Addbills = () => {
       quantity:"",
       rate:"",
       cgstPercent:"",
-      sgstPercent:"",
+      sgstPercent:""
     }
    setItems((preVal)=>([...preVal,newObj])) 
   }
   const handelSubmit=(e)=>{
+    e.preventDefault()
+    // console.log(bill);
+    // console.log(items);
+    let {companyName,workCompletionDate,PoNo,address,PAN,GSTNo,clientBankName}=bill
+    let totalAmount=items.reduce((acc,val)=>{
+      const base=parseInt(val.amount)
+      const cgst=base*parseInt(val.cgstPercent)/100
+      const sgst=base*parseInt(val.sgstPercent)/100
+
+      // console.log(base,cgst,sgst,acc);
+      
+      return acc+base+cgst+sgst
+    },0)
+    let payload={
+      companyName,
+      workCompletionDate,
+      PoNo,
+      address,
+      PAN,
+      GSTNo,
+      clientBankName,
+      items,
+      invoiceDate:new Date().toISOString().split("T")[0],
+      totalAmount
+    }
+    console.log(payload);
+
+    (async()=>{
+try {
+        let data=await empServices.addBills(payload,globalState.token)
+      if(data.status==201){
+        toast.success("Bills added successfully")
+        navigate("/home")
+      }else{
+        toast.error("Something went wrong")
+      }
+} catch (error) {
+  toast.error("Something went wrong")
+}
+    })();
+    
 
   }
+
+  // console.log(new Date().toISOString().split("T")[0]);
+  
   const removeElement=(id)=>{
-    setItems(items.filter((val)=>val.id!=id))
+setItems(items.filter((val)=>val.id!=id))
   }
+
   const updateElements=(id,name,value)=>{
+    // console.log(id,name,value);
+    
     setItems((preVal)=>{
-      return preVal.map((val)=>{
-        const updateItems={
-          ...val,[name]:value
+     return preVal.map((val)=>{
+        if(val.id==id){
+      
+          
+          const updateItems={
+            ...val,[name]:value
+          }
+          updateItems.amount=val.rate*val.quantity
+          return updateItems
         }
-        return updateItems
+
+        return val
       })
+
     })
   }
   return (
@@ -71,7 +132,9 @@ const Addbills = () => {
 
                
             <div className='border-2  w-full flex justify-center items-center px-3 rounded-sm'>
-              <input type="date" name="workCompletionDate" placeholder='Enter Work Completion Date' className='w-full outline-none px-4 h-10' onChange={handelChange}/>
+              <input type="date" name="workCompletionDate" placeholder='Enter Work Completion Date' className='w-full outline-none px-4 h-10' onChange={handelChange}
+              max={new Date().toISOString().split("T")[0]}
+              />
         
             </div>
 
@@ -108,6 +171,7 @@ const Addbills = () => {
             key={val.id}
             removeElement={removeElement}
             val={val}
+            updateElements={updateElements}
             ></BillItems>)
           }          
             <div className='border-2  w-full flex justify-center items-center px-3 rounded-sm bg-black hover:bg-[#555] active:bg-lime-500 active:scale-[0.9]'>
