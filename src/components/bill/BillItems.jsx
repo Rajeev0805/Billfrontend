@@ -6,26 +6,18 @@ import { PiSealPercentLight } from "react-icons/pi";
 import { PiSealPercentThin } from "react-icons/pi";
 import { HiDocumentRemove } from "react-icons/hi";
 const BillItems = ({removeElement,val,updateElements}) => {
-const handelChange=(e)=>{
-  let {name,value}=e.target
-  updateElements(val.id,name,value)
-}
-
-
+  const handelChange=(e)=>{
+    let {name,value}=e.target
+    updateElements(val.id,name,value)
+  }
   return (
     <>
       <div className='w-full flex justify-end items-center py-1 px-2 gap-3.5'>
-        <div
-          className='flex items-center gap-2 bg-red-400 px-4 py-1 rounded-xl hover:bg-red-600 text-amber-200 hover:text-amber-100 hover:font-medium cursor-pointer'
-          onClick={()=>{
-            removeElement(val.id)
-          }}
-        >
+        <div className='flex items-center gap-2 bg-red-400 px-4 py-1 rounded-xl hover:bg-red-600 text-amber-200 hover:text-amber-100 hover:font-medium cursor-pointer' onClick={()=>{removeElement(val.id)}}>
           <div>Remove Item</div>
           <HiDocumentRemove />
         </div>
       </div>
-
       <div className='w-full flex border-2 justify-center items-center py-1 px-2 rounded-sm'>
         <input
           type='text'
@@ -37,7 +29,6 @@ const handelChange=(e)=>{
         />
         <LiaAudioDescriptionSolid />
       </div>
-
       <div className='w-full flex border-2 justify-center items-center py-1 px-2 rounded-sm'>
         <input
           type='number'
@@ -49,7 +40,6 @@ const handelChange=(e)=>{
         />
         <RiSortNumberDesc />
       </div>
-
       <div className='w-full flex border-2 justify-center items-center py-1 px-2 rounded-sm'>
         <input
           type='number'
@@ -61,7 +51,6 @@ const handelChange=(e)=>{
         />
         <GiPriceTag />
       </div>
-
       <div className='w-full flex border-2 justify-center items-center py-1 px-2 rounded-sm'>
         <input
           type='number'
@@ -73,7 +62,6 @@ const handelChange=(e)=>{
         />
         <PiSealPercentLight />
       </div>
-
       <div className='w-full flex border-2 justify-center items-center py-1 px-2 rounded-sm'>
         <input
           type='number'
@@ -81,7 +69,6 @@ const handelChange=(e)=>{
           placeholder='Enter SGST %'
           value={val.sgstPercent}
           onChange={handelChange}
-
           className='outline-none w-full h-[30px]'
         />
         <PiSealPercentThin />

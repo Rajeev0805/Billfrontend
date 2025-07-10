@@ -3,9 +3,8 @@ import App from "./App"
 import { Toaster } from "react-hot-toast"
 import Context from "./components/context/Context"
 
-
-
 createRoot(document.getElementById("root")).render(<>
-<Context><App/></Context>
-<Toaster></Toaster>
-</>)
+    <Context><App/></Context>
+    <Toaster></Toaster>
+    </>
+)
