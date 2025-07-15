@@ -4,9 +4,12 @@ import Login from "../components/user/Login";
 import Main from "../components/user/main/Main";
 import Home from "../components/user/main/home/Home";
 import About from "../components/user/main/about/About";
-import AddBill from "../components/user/main/addBill/AddBill";
+import AddBill from "../components/user/main/addBill/AddBill"
 import UpdateBills from "../components/user/main/updateBills/UpdateBills";
-import FilterBill from "../components/user/main/filterBill/FilterBill";
+import FilterBills from "../components/user/main/filterBill/FilterBill";
+import ViewBills from "../components/viewBill/ViewBill";
+import PrivateRoute from "../components/helper/PrivateRoute";
+
 
 let routes=createBrowserRouter([
     {
@@ -15,26 +18,29 @@ let routes=createBrowserRouter([
 
     },{
         path:"/",
-        element:<Login/>
+        element:<Login></Login>
     },{
         path:"/home",
-        element:<Main></Main>,
+        element:<PrivateRoute><Main></Main></PrivateRoute>,
         children:[
             {
                 index:true,
-                element:<Home />
+                element:<Home></Home>
             },{
                 path:"about",
-                element:<About />
+                element:<About></About>
             },{
                 path:"addBills",
-                element:<AddBill />
+                element: <AddBill />
             },{
-                path:"FilterBills",
-                element:<FilterBill/>
+                path:"filterBills",
+                element:<FilterBills/>
             },{
                 path:"updateBills",
-                element:<UpdateBills />
+                element:<UpdateBills></UpdateBills>
+            },{
+                path:"viewBills",
+                element:<ViewBills/>
             }
         ]
     }
